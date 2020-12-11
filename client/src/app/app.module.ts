@@ -10,6 +10,7 @@ import { NavComponent } from './nav/nav.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 import { MoviesCardComponent } from './movies/movies-card/movies-card.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
