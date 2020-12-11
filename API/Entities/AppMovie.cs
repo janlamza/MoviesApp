@@ -10,6 +10,12 @@ namespace API.Entities
         
         public int Id { get; set; }
         public string MovieName { get; set; }
-        public DateTime Date { get; set; }
+        public string Year { get; set; }
+        public int runtime { get; set; }
+        public string genres { get; set; }
+        public string summary { get; set; }
+        public string image { get; set; }
+        public string torrent { get; set; }
+
     }
 }
