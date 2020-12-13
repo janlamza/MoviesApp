@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { error } from 'protractor';
+import { MoviesService } from '../../_services/movies.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -10,26 +12,20 @@ export class MoviesListComponent implements OnInit {
   movies: any;
   specificMovie: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private moviesService: MoviesService) { }
 
   ngOnInit() {
     this.getMovies();
   }
 
+
   getMovies() {
-    this.http.get("https://localhost:5001/api/Movies").subscribe(response => {
-      this.movies = response;
+    this.moviesService.getMovies().subscribe(response => {
+      this.movies = response
     }, error => {
-      console.log(error);
+        console.log(error);
     })
   }
 
-  getMovieById() {
-    this.http.get("https://localhost:5001/api/Movies/1").subscribe(result => {
-      this.specificMovie = result;
-    }, error => {
-      console.log(error);
-    })
-  }
 
 }

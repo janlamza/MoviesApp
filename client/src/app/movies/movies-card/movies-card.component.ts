@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movies-card',
@@ -7,13 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MoviesCardComponent implements OnInit {
   @Input() movie: any;
-  card_summary: any;
+
   constructor() { }
 
   ngOnInit(): void {
   }
-  cropInfoLength() {
-    this.card_summary = this.movie.summary
-  }
+  
 
 }

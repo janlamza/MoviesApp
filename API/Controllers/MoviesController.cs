@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,10 +24,38 @@ namespace API.Controllers
         {
             return await _movieContext.Movies.ToListAsync();
         }
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<AppMovie>> GetMovies(int id)
         {
             return await _movieContext.Movies.FindAsync(id);
+        }
+
+
+        [HttpPost("addMovie")]
+        public async Task<ActionResult> AddMovie(MovieDto movieDto)
+        {
+            bool rez = await _movieContext.Movies.AnyAsync(x => x.MovieName == movieDto.MovieName);
+            if (rez) return BadRequest("Movie already exists");
+
+            var movie = new AppMovie
+            {
+                MovieName = movieDto.MovieName,
+                Year = movieDto.Year,
+                runtime = movieDto.runtime,
+                genres = movieDto.genres,
+                summary = movieDto.summary,
+                image = movieDto.image,
+                torrent = movieDto.torrent
+            };
+            _movieContext.Movies.Add(movie);
+            var result = await _movieContext.SaveChangesAsync();
+
+            if (result > 0) 
+                return Ok("Movie saved to database");
+            else 
+                return BadRequest("Movie not saved to database");
         }
 
     }

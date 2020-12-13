@@ -3,14 +3,15 @@
   <div class="container">
          <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-          <a class="nav-link" href="#">Movies App</a>
+          <a class="nav-link" routerLink="/">Movies App</a>
         </li>
       </ul>
       
-        <form class="">
-          <button class="btn btn-info" type="submit">Sign-up</button>
-          <button class="btn btn-info" type="submit">log-in</button>
-        </form>
+        
+
+          <button  [routerLink] ="['/signup']" class="btn btn-info" >Sign-up</button>
+          <button [routerLink] ="['/login']" class="btn btn-info" >log-in</button>
+        
       
    </div>
 </nav>
