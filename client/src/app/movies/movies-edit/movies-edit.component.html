@@ -1,1 +1,64 @@
-<p>movies-edit works!</p>
+<div class="container rounded bg-light border-bottom ">
+  <form (ngSubmit)="EditMovie()" autocomplete="off">
+    <h2 class="text-center text-secondary"> Edit movie</h2>
+    <hr />
+
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group ">
+          <label for="movieName">Movie Name</label>
+          <input type="text" class="form-control" name="movieName"
+                 size="10" [(ngModel)]="movie.movieName" placeholder="" />
+        </div>
+
+        <div class="form-group ">
+          <label for="year">Year</label>
+          <input type="text" class="form-control" name="year"
+                 [(ngModel)]="movie.year" placeholder="" />
+        </div>
+        <div class="form-group ">
+          <label for="runtime">Runtime</label>
+          <input type="number" class="form-control" name="runtime"
+                 [(ngModel)]="movie.runtime" placeholder="" />
+        </div>
+      </div>
+      <div class="col-6">
+        <img src="{{movie.image}}" class="rounded img-fluid img-thumbnail"/>
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="genres">genres</label>
+      <select class="form-control"
+              [(ngModel)]="movie.genres" name="genres" >
+        <option *ngFor="let gen of genres" [value]="gen">{{gen}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="summary">summary</label>
+      <textarea name="summary" class="form-control" rows="5"
+                [(ngModel)]="movie.summary" placeholder="">
+       </textarea>
+    </div>
+    <div class="form-group">
+      <label for="image">image</label>
+      <input type="text" class="form-control" name="image"
+             [(ngModel)]="movie.image" placeholder="" />
+    </div>
+    <div class="form-group">
+      <label for="torrent">torrent</label>
+      <input type="text" class="form-control" name="torrent"
+             [(ngModel)]="movie.torrent" placeholder="" />
+    </div>
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" type="submit">Save Changes</button>
+      <button class="btn btn-danger">Delete</button>
+      <button [routerLink]="['/']" class="btn btn-outline-info">Cancel</button>
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,13 @@
+.container{
+    margin-top:100px;
+    width:700px;
+}
+.btn-outline-info{
+    margin-left:15px;
+}
+.btn-danger{
+    margin-left:15px;
+}
+.img-fluid{
+    max-height:250px;
+}

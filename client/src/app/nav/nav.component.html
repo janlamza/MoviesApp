@@ -3,12 +3,12 @@
   <div class="container">
          <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-          <a class="nav-link" routerLink="/">Movies App</a>
+          <a class="nav-link text-white" routerLink="/" >Movies App</a>
         </li>
       </ul>
       
         
-
+         <button [routerLink]="['/add']" class="btn btn-success">add Movie!</button>
           <button  [routerLink] ="['/signup']" class="btn btn-info" >Sign-up</button>
           <button [routerLink] ="['/login']" class="btn btn-info" >log-in</button>
         

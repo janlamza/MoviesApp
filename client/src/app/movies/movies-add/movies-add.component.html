@@ -1,0 +1,67 @@
+
+<div class="container rounded bg-light border-bottom ">
+  <form (ngSubmit)="addMovie()" autocomplete="off">
+    <h2 class="text-center "> Add a movie</h2>
+    <hr />
+    <div class="row">
+      <div class="col-6">
+
+
+
+        <div class="form-group">
+          <label for="MovieName">Movie Name</label>
+          <input type="text" class="form-control" name="MovieName"
+                 [(ngModel)]="movie.MovieName" placeholder="Once upon a time in the West" />
+        </div>
+
+        <div class="form-group">
+          <label for="Year">Year</label>
+          <input type="text" class="form-control" name="Year"
+                 [(ngModel)]="movie.Year" placeholder="1997" />
+        </div>
+        <div class="form-group">
+          <label for="runtime">Runtime</label>
+          <input type="number" class="form-control" name="runtime"
+                 [(ngModel)]="movie.runtime" placeholder="190" />
+        </div>
+      </div>
+      <div class="col-6">
+        <img src="../../../assets/generic.jpg" class="image img-thumbnail rounded"/>
+      </div>
+    </div>
+    
+
+
+
+    <div class="form-group">
+      <label for="genres">genres</label>
+      <select class="form-control"
+              [(ngModel)]="movie.genres" name="genres">
+        <option *ngFor="let gen of genres" [value]="gen">{{gen}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="summary">summary</label>
+      <textarea name="summary" class="form-control" rows="5"
+                [(ngModel)]="movie.summary" placeholder="plot of the movie">
+       </textarea>
+    </div>
+    <div class="form-group">
+      <label for="image">image</label>
+      <input type="text" class="form-control" name="image"
+             [(ngModel)]="movie.image" placeholder="image url here" />
+    </div>
+    <div class="form-group">
+      <label for="torrent">torrent</label>
+      <input type="text" class="form-control" name="torrent"
+             [(ngModel)]="movie.torrent" placeholder="torrent url here" />
+    </div>
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" type="submit">add Movie!</button>
+      <button [routerLink]="['/']" class="btn btn-outline-info">cancel</button>
+    </div>
+
+  </form>
+</div>
+

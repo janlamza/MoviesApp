@@ -58,5 +58,15 @@ namespace API.Controllers
                 return BadRequest("Movie not saved to database");
         }
 
+
+        [HttpPut("edit")]
+        public async Task<ActionResult> EditMovie(AppMovie appMovie)
+        {
+
+            _movieContext.Entry(appMovie).State = EntityState.Modified;
+            if (await _movieContext.SaveChangesAsync() > 0) return NoContent();
+            return BadRequest("Failed to update Movie!");
+        }
+
     }
 }

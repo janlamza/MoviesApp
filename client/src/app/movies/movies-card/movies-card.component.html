@@ -3,8 +3,8 @@
     <img class="card-img-top" src="{{movie.image}}" alt="Card image cap">
     <ul class="list-inline movies-icons animate progress-bar-animated text-center">
       <li><h2 class="card-text text-dark"> {{movie.genres}} </h2></li>
-      <li class="list-inline-item"><button class="btn btn-info"  [routerLink] ="['/info', movie.id]"><i class="fa fa-download"></i></button></li>
-
+      <li class="list-inline-item"><button class="btn btn-info" [routerLink]="['/info', movie.id]"><i class="fa fa-download"></i></button></li>
+      <li class="list-inline-item"><button class="btn btn-info" [routerLink]="['/edit', movie.id]" ><i class="fa fa-pencil-square-o" ></i></button></li>
     </ul>
   </div>
     <div class="card-body">

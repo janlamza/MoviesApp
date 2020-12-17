@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Movie } from '../_models/movie';
+import { MovieAdd } from '../_models/movie-add';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,11 @@ export class MoviesService {
   }
   getMovieById(id: number) {
     return this.http.get<Movie>(this.baseUrl + 'Movies/' + id);
+  }
+  addMovie(movie: MovieAdd) {
+    return this.http.post(this.baseUrl + 'Movies/addMovie', movie);
+  }
+  editMovie(movie: Movie) {
+    return this.http.put(this.baseUrl + 'Movies/edit', movie);
   }
 }
