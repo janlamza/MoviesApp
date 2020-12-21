@@ -1,5 +1,11 @@
-<div class="container rounded bg-light border-bottom ">
-  <form (ngSubmit)="EditMovie()" autocomplete="off">
+<div class="container rounded bg-light border-bottom" >
+
+  <div class="alert alert-info" *ngIf="editForm.dirty">
+    <strong>Information:</strong> You have made changes. Any unsaved changes will be lost
+  </div>
+
+
+  <form   #editForm="ngForm" (ngSubmit)="EditMovie()" autocomplete="off">
     <h2 class="text-center text-secondary"> Edit movie</h2>
     <hr />
 
@@ -54,11 +60,10 @@
     </div>
 
     <div class="form-group text-center">
-      <button class="btn btn-success" type="submit">Save Changes</button>
-      <button class="btn btn-danger">Delete</button>
-      <button [routerLink]="['/']" class="btn btn-outline-info">Cancel</button>
+      <button [disabled]="!editForm.dirty" class="btn btn-success" type="submit">Save Changes</button>
+      <button class="btn btn-danger" (click)="DeleteMovie()">Delete</button>
+      <button (click)="Leave()" class="btn btn-outline-info">Cancel</button>
     </div>
-
   </form>
 
 </div>

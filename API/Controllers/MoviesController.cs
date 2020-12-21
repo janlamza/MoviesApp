@@ -64,8 +64,18 @@ namespace API.Controllers
         {
 
             _movieContext.Entry(appMovie).State = EntityState.Modified;
-            if (await _movieContext.SaveChangesAsync() > 0) return NoContent();
+            if (await _movieContext.SaveChangesAsync() > 0) return Ok();
             return BadRequest("Failed to update Movie!");
+        }
+
+        [HttpDelete("delete")]
+        public async Task<ActionResult> DeleteMovie(MovieDeleteDTO deleteDTO)
+        {
+            AppMovie movie = await _movieContext.Movies.FindAsync(deleteDTO.id);
+            if (movie == null) return NotFound("movie not found");
+            _movieContext.Remove(movie);
+            if (await _movieContext.SaveChangesAsync() > 0) return Ok();
+            return BadRequest("Error deleting object");
         }
 
     }

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Movie } from '../_models/movie';
 import { MovieAdd } from '../_models/movie-add';
+import { MovieDelete } from '../_models/movie-delete';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class MoviesService {
   }
   editMovie(movie: Movie) {
     return this.http.put(this.baseUrl + 'Movies/edit', movie);
+  }
+  deleteMovie(movie: MovieDelete) {
+
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: { "id": movie.id } };
+    return this.http.delete<MovieDelete>(this.baseUrl + 'Movies/delete', httpOptions);
   }
 }
