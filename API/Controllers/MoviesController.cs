@@ -27,11 +27,19 @@ namespace API.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppMovie>> GetMovies(int id)
+        public async Task<ActionResult<AppMovie>> GetMoviesById(int id)
         {
             return await _movieContext.Movies.FindAsync(id);
         }
 
+
+        [HttpGet("Search/{movieName}")]
+        public async Task<ActionResult<IEnumerable<AppMovie>>> GetMovieByUsername(string movieName)
+        {
+            int length = movieName.Length;
+            //return await _movieContext.Movies.FirstOrDefaultAsync(x => x.MovieName.Substring(0, movieName.Length) == movieName);
+            return await _movieContext.Movies.FromSqlInterpolated($"SELECT * FROM dbo.Movies WHERE SUBSTRING(MovieName,1,{length}) = {movieName}").ToListAsync();            
+        }
 
         [HttpPost("addMovie")]
         public async Task<ActionResult> AddMovie(MovieDto movieDto)
@@ -57,6 +65,7 @@ namespace API.Controllers
             else 
                 return BadRequest("Movie not saved to database");
         }
+        
 
 
         [HttpPut("edit")]
@@ -69,14 +78,16 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult> DeleteMovie(MovieDeleteDTO deleteDTO)
+        public async Task<ActionResult> DeleteMovie(MovieDeleteDTO movieDelete)
         {
-            AppMovie movie = await _movieContext.Movies.FindAsync(deleteDTO.id);
-            if (movie == null) return NotFound("movie not found");
+            AppMovie movie = await _movieContext.Movies.FindAsync(movieDelete.id);
+            if (movie == null) return NotFound("movie not found" );
             _movieContext.Remove(movie);
             if (await _movieContext.SaveChangesAsync() > 0) return Ok();
             return BadRequest("Error deleting object");
         }
+
+
 
     }
 }

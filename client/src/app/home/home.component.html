@@ -16,19 +16,21 @@
 
 
 <div class="container align-content-center">
-  <form class="">
-    <div class="input-group input-group-lg">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa fa-search" aria-hidden="true"></i></span>
+  <form   (ngSubmit)="(SearchMovie())"   autocomplete="off">
+    <div class="form-group">
+      <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa fa-search" aria-hidden="true"></i></span>
+        </div>
+        <input (input)="movieName = $event.target.value" type="text" class="form-control" aria-label="Large" placeholder="Movie name" aria-describedby="inputGroup-sizing-sm">
       </div>
-      <input type="text" class="form-control" aria-label="Large" placeholder="Movie name" aria-describedby="inputGroup-sizing-sm">
+      <button [disabled]="!movieName" class="btn btn-success btn1 btn-lg" type="submit">Search</button>
     </div>
-    <button class="btn btn-success btn1 btn-lg" type="submit">Search</button>
   </form>
 
 </div>
 
 <div class="container">
-
-  <app-movies-list></app-movies-list>
+  
+  <app-movies-list [movies]="movies"></app-movies-list>
 </div>

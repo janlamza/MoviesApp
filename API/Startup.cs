@@ -25,6 +25,7 @@ namespace API
             services.AddDbContext<MovieContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MoviesAppDatabase")));
             services.AddCors();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

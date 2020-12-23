@@ -18,6 +18,7 @@ import { MoviesAddComponent } from './movies/movies-add/movies-add.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import { MoviesAddComponent } from './movies/movies-add/movies-add.component';
     LogInComponent,
     SignUpComponent,
     HomeComponent,
-    MoviesAddComponent
+    MoviesAddComponent,
   ],
   imports: [
     BrowserModule,

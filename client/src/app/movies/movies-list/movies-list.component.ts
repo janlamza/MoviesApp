@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { error } from 'protractor';
+import { Movie } from '../../_models/movie';
 import { MoviesService } from '../../_services/movies.service';
 
 @Component({
@@ -9,12 +10,13 @@ import { MoviesService } from '../../_services/movies.service';
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit {
-  movies: any;
+  @Input() movies: any;
   specificMovie: any;
 
   constructor(private http: HttpClient, private moviesService: MoviesService) { }
 
   ngOnInit() {
+    if (!this.movies)
     this.getMovies();
   }
 

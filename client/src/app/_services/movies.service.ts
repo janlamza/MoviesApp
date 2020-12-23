@@ -16,18 +16,31 @@ export class MoviesService {
   getMovies() {
     return this.http.get<Movie[]>(this.baseUrl + 'Movies');
   }
+
+
   getMovieById(id: number) {
     return this.http.get<Movie>(this.baseUrl + 'Movies/' + id);
   }
+
+
   addMovie(movie: MovieAdd) {
     return this.http.post(this.baseUrl + 'Movies/addMovie', movie);
   }
+
+
   editMovie(movie: Movie) {
     return this.http.put(this.baseUrl + 'Movies/edit', movie);
   }
-  deleteMovie(movie: MovieDelete) {
 
+
+  deleteMovie(movie: MovieDelete) {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: { "id": movie.id } };
     return this.http.delete<MovieDelete>(this.baseUrl + 'Movies/delete', httpOptions);
   }
+
+
+  searchMovie(movieName: string) {
+    return this.http.get<Movie[]>(this.baseUrl + 'Movies/Search/' + movieName);
+  }
+
 }
