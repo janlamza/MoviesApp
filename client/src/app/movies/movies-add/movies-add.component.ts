@@ -19,7 +19,7 @@ export class MoviesAddComponent implements OnInit {
     'Drama', 'War', 'Romance', 'Sport',
     'Musical', 'Action', 'Horror',
     'Thriller', 'Crime', 'Adventure',
-    'History', 'Mistery'];
+    'History', 'Mistery','Western'];
 
   ngOnInit() {
 

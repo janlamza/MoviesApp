@@ -1,6 +1,6 @@
 
 <div  class="card-deck rounded bg-light border-top border-bottom">
-  <div *ngFor="let movie of movies" class="col-3" >
+  <div *ngFor="let movie of movies$ | async" class="col-3" >
     <app-movies-card [movie]="movie"></app-movies-card>
   </div>
 

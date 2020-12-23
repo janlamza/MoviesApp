@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { error } from 'protractor';
+import { Observable } from 'rxjs';
 import { Movie } from '../_models/movie';
 import { MoviesService } from '../_services/movies.service';
 
@@ -10,7 +11,7 @@ import { MoviesService } from '../_services/movies.service';
 })
 export class HomeComponent implements OnInit {
   movieName: string = null;
-  movies: any;
+  movies: Observable<Movie[]>;
   constructor(private movieService: MoviesService) { }
 
   ngOnInit() {
@@ -19,10 +20,7 @@ export class HomeComponent implements OnInit {
 
   SearchMovie() {
 
-    this.movieService.searchMovie(this.movieName).subscribe(response => {
-      this.movies = response;
-      console.log(this.movies);
-    })
+    this.movies = this.movieService.searchMovie(this.movieName)
   }
 
 

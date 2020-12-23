@@ -18,7 +18,7 @@ export class MoviesEditComponent implements OnInit {
     'Drama', 'War', 'Romance', 'Sport',
     'Musical', 'Action', 'Horror',
     'Thriller', 'Crime', 'Adventure',
-    'History', 'Mistery'];
+    'History', 'Mistery', 'Western'];
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MoviesService) { }
 
@@ -51,11 +51,7 @@ export class MoviesEditComponent implements OnInit {
   //delete movie service call
   DeleteMovie() {
     this.deleteMovie.id = this.id;
-    this.movieService.deleteMovie(this.deleteMovie).subscribe(result => {
-      console.log(result);
-    }, error => {
-        console.log(error);
-    })
+    this.movieService.deleteMovie(this.deleteMovie).subscribe()
     this.router.navigate(['/']);
   }
   
