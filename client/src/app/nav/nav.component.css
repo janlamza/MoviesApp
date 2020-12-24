@@ -1,4 +1,7 @@
 .btn-info {
   margin-left: 10px;
 }
+.nav-link:hover{
+    cursor:pointer;
+}
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RoutingService } from '../_services/routing.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private routingService: RoutingService) { }
 
   ngOnInit(): void {
+  }
+
+  redirectMeToHome(uri: string) {
+    this.routingService.redirectToHome(uri);
   }
 
 }

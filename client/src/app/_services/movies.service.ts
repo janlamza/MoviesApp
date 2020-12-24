@@ -5,7 +5,7 @@ import { Movie } from '../_models/movie';
 import { MovieAdd } from '../_models/movie-add';
 import { MovieDelete } from '../_models/movie-delete';
 import { map } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +59,10 @@ export class MoviesService {
 
   searchMovie(movieName: string) {
     return this.http.get<Movie[]>(this.baseUrl + 'Movies/Search/' + movieName);
+  }
+
+  searchByGenres(SelectedGenre: string) {
+    return of(this.movies.filter(match => match.genres === SelectedGenre))
   }
 
 }

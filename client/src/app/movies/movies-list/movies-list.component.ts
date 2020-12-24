@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { error } from 'protractor';
 import { Observable } from 'rxjs';
 import { Movie } from '../../_models/movie';
@@ -17,7 +17,6 @@ export class MoviesListComponent implements OnInit {
   constructor(private http: HttpClient, private moviesService: MoviesService) { }
 
   ngOnInit() {
-    
       this.movies$ = this.moviesService.getMovies();
   }
 
