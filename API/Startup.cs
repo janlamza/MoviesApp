@@ -1,6 +1,11 @@
 using API.Data;
+using API.Entities;
+using API.Extensions;
+using API.Interfaces;
+using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +30,10 @@ namespace API
             services.AddDbContext<MovieContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MoviesAppDatabase")));
             services.AddCors();
-            
+            services.AddIdentityServices(Configuration);
+            services.AddScoped<ITokenService, TokenService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +51,8 @@ namespace API
 
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
+            app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

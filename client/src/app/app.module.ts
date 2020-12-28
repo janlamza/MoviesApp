@@ -11,10 +11,10 @@ import { MoviesListComponent } from './movies/movies-list/movies-list.component'
 import { MoviesCardComponent } from './movies/movies-card/movies-card.component';
 import { MoviesEditComponent } from './movies/movies-edit/movies-edit.component';
 import { MoviesInfoComponent } from './movies/movies-info/movies-info.component';
-import { LogInComponent } from './registration/log-in/log-in.component';
 import { SignUpComponent } from './registration/sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { MoviesAddComponent } from './movies/movies-add/movies-add.component';
+import { HasRoleDirective } from './_directive/has-role.directive';
 
 
 
@@ -27,10 +27,10 @@ import { MoviesAddComponent } from './movies/movies-add/movies-add.component';
     MoviesCardComponent,
     MoviesEditComponent,
     MoviesInfoComponent,
-    LogInComponent,
     SignUpComponent,
     HomeComponent,
     MoviesAddComponent,
+    HasRoleDirective,
   ],
   imports: [
     BrowserModule,

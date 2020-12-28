@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserRergister } from '../../_models/user-register';
+import { AccountService } from '../../_services/account.service';
+import { RoutingService } from '../../_services/routing.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
-  constructor() { }
+  userSign: UserRergister = {} as any;
+  constructor(private accountService: AccountService, private routingService: RoutingService) { }
 
   ngOnInit(): void {
   }
-
+  signUp(uri: string) {
+    this.accountService.registerUser(this.userSign).subscribe(response => {
+      this.routingService.redirectToHome(uri);
+    })
+  }
 }

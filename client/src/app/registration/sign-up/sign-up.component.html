@@ -1,3 +1,19 @@
 <div class="container rounded bg-light border-bottom" >
-  <p>sign-up works!</p>
+  <form (ngSubmit)="signUp('/')">
+    <div class="form-group">
+      <input name="username"
+             [(ngModel)]="userSign.Username"
+             class="form-control mr-sm-2"
+             type="text"
+             placeholder="Username">
+      <input name="password"
+             [(ngModel)]="userSign.password"
+             class="form-control mr-sm-2"
+             type="password"
+             placeholder="Password">
+       <button  [disabled]="!(userSign.Username && userSign.password)" class="btn btn-info" type="submit">Sign-up</button>
+    </div>
+
+
+  </form>
 </div>
