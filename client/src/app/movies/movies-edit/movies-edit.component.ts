@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { error } from 'protractor';
 import { Movie } from '../../_models/movie';
 import { MovieDelete } from '../../_models/movie-delete';
 import { MoviesService } from '../../_services/movies.service';
+import { RoutingService } from '../../_services/routing.service';
 
 @Component({
   selector: 'app-movies-edit',
@@ -20,7 +22,8 @@ export class MoviesEditComponent implements OnInit {
     'Thriller', 'Crime', 'Adventure',
     'History', 'Mistery', 'Western'];
 
-  constructor(private route: ActivatedRoute, private router: Router, private movieService: MoviesService) { }
+  constructor(private route: ActivatedRoute, private movieService: MoviesService,
+    private routingService: RoutingService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.get_id();
@@ -44,19 +47,24 @@ export class MoviesEditComponent implements OnInit {
 
   //edit--- update movie service call
   EditMovie() {
-    this.movieService.editMovie(this.movie).subscribe();
-    this.router.navigate(['/']);
+    this.movieService.editMovie(this.movie).subscribe(response => {
+      this.toastr.success("changes saved", "Success!");
+    });
+    this.routingService.redirectToHome('/');
+    
   }
 
   //delete movie service call
   DeleteMovie() {
     this.deleteMovie.id = this.id;
-    this.movieService.deleteMovie(this.deleteMovie).subscribe()
-    this.router.navigate(['/']);
+    this.movieService.deleteMovie(this.deleteMovie).subscribe(response => {
+      this.toastr.info("Movie deleted", "Delete Successful");
+    })
+    this.routingService.redirectToHome('/');
   }
   
   Leave() {
-    this.router.navigate(['/']);
+    this.routingService.redirectToHome('/');
   }
 
 }

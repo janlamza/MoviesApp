@@ -1,9 +1,17 @@
 
 <div  class="card-deck rounded bg-light border-top border-bottom">
-  <div *ngFor="let movie of movies$ | async" class="col-3" >
+  <div *ngFor="let movie of movies" class="col-3" >
     <app-movies-card [movie]="movie"></app-movies-card>
   </div>
 
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+  <pagination [totalItems]="pagination.totalItems"
+              [itemsPerPage]="pagination.itemsPerPage"
+              [(ngModel)]="pagination.currentPage"
+              (pageChanged)="pageChanged($event)"
+              ></pagination>
 </div>
 
 

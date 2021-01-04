@@ -12,7 +12,8 @@ import { MoviesService } from '../_services/movies.service';
 })
 export class HomeComponent implements OnInit {
   movieName: string = null;
-  movies: Observable<Movie[]>;
+  //movies: Observable<Movie[]>;
+  movies: Movie[];
   genres = ['Documentary', 'Comedy',
     'Drama', 'War', 'Romance', 'Sport',
     'Musical', 'Action', 'Horror',
@@ -31,11 +32,15 @@ export class HomeComponent implements OnInit {
 
 
   SearchMovie() {
-    this.movies = this.movieService.searchMovie(this.movieName)
+    this.movieService.searchMovie(this.movieName).subscribe(response => {
+      this.movies = response;
+    })
   }
 
   searchGenre() {
-    this.movies = this.movieService.searchByGenres(this.selectedGenre);
+    this.movieService.searchByGenres(this.selectedGenre).subscribe(response => {
+      this.movies = response;
+    })
     console.log("genres work" + this.selectedGenre)
   }
 

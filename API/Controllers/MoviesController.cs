@@ -1,6 +1,8 @@
 ﻿using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +23,13 @@ namespace API.Controllers
 
         
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppMovie>>> GetMovies()
+        public async Task<ActionResult<IEnumerable<AppMovie>>> GetMovies([FromQuery] MoviesParams moviesParams)
         {
-            return await _movieContext.Movies.ToListAsync();
+            var query = _movieContext.Movies.AsNoTracking();
+            var movies = await PagedList<AppMovie>.CreateAsync(query, moviesParams.PageNumber, moviesParams.PageSize);
+
+            Response.AddPaginationHeader(movies.CurrentPage, movies.PageSize, movies.TotalCount, movies.Totalpages);
+            return movies;
         }
 
 
@@ -41,6 +47,13 @@ namespace API.Controllers
             //return await _movieContext.Movies.FirstOrDefaultAsync(x => x.MovieName.Substring(0, movieName.Length) == movieName);
             return await _movieContext.Movies.FromSqlInterpolated($"SELECT * FROM dbo.Movies WHERE SUBSTRING(MovieName,1,{length}) = {movieName}").ToListAsync();            
         }
+
+        [HttpGet("genre/{genre}")]
+        public async Task<ActionResult<IEnumerable<AppMovie>>> GetMoviesByGenre(string genre)
+        {
+            return await _movieContext.Movies.FromSqlInterpolated($"SELECT * FROM dbo.Movies WHERE genres = {genre}").ToListAsync();
+        }
+
 
         [HttpPost("addMovie")]
         public async Task<ActionResult> AddMovie(MovieDto movieDto)
@@ -62,7 +75,7 @@ namespace API.Controllers
             var result = await _movieContext.SaveChangesAsync();
 
             if (result > 0) 
-                return Ok("Movie saved to database");
+                return Ok();
             else 
                 return BadRequest("Movie not saved to database");
         }

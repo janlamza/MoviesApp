@@ -15,7 +15,8 @@ import { SignUpComponent } from './registration/sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { MoviesAddComponent } from './movies/movies-add/movies-add.component';
 import { HasRoleDirective } from './_directive/has-role.directive';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -30,7 +31,8 @@ import { HasRoleDirective } from './_directive/has-role.directive';
     SignUpComponent,
     HomeComponent,
     MoviesAddComponent,
-    HasRoleDirective,
+    HasRoleDirective
+
   ],
   imports: [
     BrowserModule,
@@ -38,8 +40,14 @@ import { HasRoleDirective } from './_directive/has-role.directive';
     AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
-    FormsModule
-
+    FormsModule,
+    PaginationModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Movie } from '../_models/movie';
@@ -6,6 +6,7 @@ import { MovieAdd } from '../_models/movie-add';
 import { MovieDelete } from '../_models/movie-delete';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,39 @@ import { Observable, of } from 'rxjs';
 export class MoviesService {
   movies: Movie[] = [];
   baseUrl = environment.apiUrl;
+  paginatedResult: PaginatedResult<Movie[]> = new PaginatedResult<Movie[]>();
+  moviesCache = new Map();
+
   constructor(private http: HttpClient) { }
 
-  getMovies() {
-    if (this.movies.length > 0) return of(this.movies);
-    return this.http.get<Movie[]>(this.baseUrl + 'Movies').pipe(
+
+
+
+  getMovies(page?: number, itemsPerPage?: number) {
+
+    
+
+
+    let params = new HttpParams();
+    if (page !== null && itemsPerPage !== null) {
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+    }
+    
+    return this.http.get<Movie[]>(this.baseUrl + 'Movies', { observe: 'response', params }).pipe(
       map(response => {
-        this.movies = response
-        return response;
+        this.paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') !== null) {
+          this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return this.paginatedResult;
       }) 
     )
   }
 
 
   getMovieById(id: number) {
-    const movie = this.movies.find(x => x.id === id);
+    const movie = this.paginatedResult.result.find(x => x.id === id);
     if (movie !== undefined) return of(movie);
     return this.http.get<Movie>(this.baseUrl + 'Movies/' + id);
   }
@@ -62,7 +81,7 @@ export class MoviesService {
   }
 
   searchByGenres(SelectedGenre: string) {
-    return of(this.movies.filter(match => match.genres === SelectedGenre))
+    return this.http.get<Movie[]>(this.baseUrl + 'Movies/genre/' + SelectedGenre);
   }
 
 }

@@ -1,8 +1,11 @@
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { MovieAdd } from '../../_models/movie-add';
 
 import { MoviesService } from '../../_services/movies.service';
+import { RoutingService } from '../../_services/routing.service';
 
 @Component({
   selector: 'app-movies-add',
@@ -13,7 +16,8 @@ export class MoviesAddComponent implements OnInit {
 
   movie: MovieAdd = {} as any;
 
-  constructor(private moviesService: MoviesService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private moviesService: MoviesService, private toastr: ToastrService,
+    private routingService: RoutingService) { }
 
   genres = ['Documentary', 'Comedy',
     'Drama', 'War', 'Romance', 'Sport',
@@ -26,13 +30,13 @@ export class MoviesAddComponent implements OnInit {
   }
 
   addMovie() {
-
     this.moviesService.addMovie(this.movie).subscribe(response => {
-      console.log(response);
+      this.toastr.success("Added movies", "Success!");
+      this.routingService.redirectToHome("/");
     }, error => {
-        console.log(error);
+        this.toastr.error("Movie exists", "Error!");  
     })
-    this.router.navigate(['']);
+    
     
   }
 
