@@ -26,6 +26,7 @@ Dok se korisnik ne logira ne može preuzeti torrent link, ali može koristiti tr
  * Angular (10.2.0 + Node 12.19.0)
  * .NET (5.0.100 SDK --> 5.0.0 Rutime)
    * Entity framework ( 5.0.0)
+   * Microsoft Identity ( 5.0.0)
    * SqlServer ( 5.0.0)
    * JwtBearer ( 5.0.0)
  * HTML, CSS, Font Awesome, Toastr service, Ngx-Bootstrap ...
