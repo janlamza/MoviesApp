@@ -20,7 +20,7 @@ Aplikacija sadrži 2 logički i fizički razdvojena dijela Client stranu (**Angu
   
 Dok se korisnik ne logira ne može preuzeti torrent link, ali može koristiti tražilicu i vidjeti informacije pojedninog filma.  
  Korisnik postaje autentičan nakon logiranja. Običan korisnik (Member) može samo preuzeti torrent. Moderator može editat film  
- dok admin može osim prethodnog i dodavat film.    
+dok admin može osim prethodnog i dodavat film.    
  <br/>
  ### Korištene tehnologije :
  * Angular (10.2.0 + Node 12.19.0)
