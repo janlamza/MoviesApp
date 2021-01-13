@@ -1,4 +1,7 @@
-<div class="container rounded bg-light border-bottom" >
+<div class="container rounded bg-light border-bottom pomakni">
+  <div class="alert alert-info" >
+    <strong>Information:</strong> Sign up now so you can get access to all the Torrents for free
+  </div>
   <form (ngSubmit)="signUp('/')">
     <div class="form-group">
       <input name="username"
@@ -11,7 +14,7 @@
              class="form-control mr-sm-2"
              type="password"
              placeholder="Password">
-       <button  [disabled]="!(userSign.Username && userSign.password)" class="btn btn-info" type="submit">Sign-up</button>
+      <button [disabled]="!(userSign.Username && userSign.password)" class="btn btn-info" style="margin-top:25px;" type="submit">Sign-up</button>
     </div>
 
 
